@@ -28,8 +28,6 @@ const IngredientSelectionActivity: ActivityComponentType = () => {
   const onSelect = useCallback(() => {
     setOpen(false);
   }, [setOpen]);
-
-  console.log(chatbot.ingredients, selectedIngredients);
   return (
     <AppScreen appBar={{ title: "재료 선택" }}>
       <FixedBottom

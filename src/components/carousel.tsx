@@ -28,7 +28,6 @@ export function EmblaCarousel({ characters }: EmblaCarouselProps) {
     tweenNodes.current = emblaApi.slideNodes().map((slideNode) => {
       return slideNode.querySelector(".embla__slide__img") as HTMLElement;
     });
-    console.log("tweenNodes", tweenNodes.current);
   }, []);
 
   const setTweenFactor = useCallback((emblaApi: EmblaCarouselType) => {
@@ -69,7 +68,7 @@ export function EmblaCarousel({ characters }: EmblaCarouselProps) {
           const tweenValue = 1 - Math.abs(diffToTarget * tweenFactor.current);
           const scale = numberWithinRange(tweenValue, 0, 1).toString();
           const tweenNode = tweenNodes.current[slideIndex];
-          console.log("tweenNode", tweenNode);
+
           tweenNode.style.transform = `scale(${scale})`;
         });
       });
@@ -123,8 +122,8 @@ export function EmblaCarousel({ characters }: EmblaCarouselProps) {
             className={cn(
               "embla__dot w-4 h-4 rounded-full",
               index === selectedIndex
-                ? "bg-[#898989] embla__dot--selected"
-                : "bg-[#d9d9d9]"
+                ? "bg-gray-700 embla__dot--selected"
+                : "bg-gray-200"
             )}
           />
         ))}
