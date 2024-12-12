@@ -8,17 +8,17 @@ export const characters: Character[] = [
   {
     id: 1,
     mood: "화남",
-    image: "/images/화남_300.svg",
+    image: "/images/화남.png",
   },
   {
     id: 2,
     mood: "슬픔",
-    image: "/images/슬픔_300.svg",
+    image: "/images/슬픔.png",
   },
   {
     id: 3,
     mood: "기쁨",
-    image: "/images/기쁨_300.svg",
+    image: "/images/기쁨.png",
   },
 ];
 
