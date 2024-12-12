@@ -26,7 +26,7 @@ function IngredientSelect({
       <input
         type="text"
         placeholder="재료 검색"
-        className="rounded-[10px] px-5 py-4 w-full bg-[#efe4cc] text-[#6d6d6d]"
+        className="rounded-[10px] px-5 py-4 w-full bg-gray-50 placeholder:text-gray-500"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />

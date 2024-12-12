@@ -29,7 +29,7 @@ const IngredientSelectionActivity: ActivityComponentType = () => {
     setOpen(false);
   }, [setOpen]);
   return (
-    <AppScreen appBar={{ title: "재료 선택" }}>
+    <AppScreen appBar={{ title: "재료 선택하기" }}>
       <FixedBottom
         bottom={
           <Button
@@ -52,16 +52,18 @@ const IngredientSelectionActivity: ActivityComponentType = () => {
         <div className="w-full h-full py-6 px-4">
           <h1 className="sr-only">재료 선택</h1>
           <h2>선호 재료</h2>
-          <p>* 1개 이상의 식재료를 선택해 주세요(최대 2개)</p>
-          재료를 선택해주세요
+          <p className="text-gray-600 text-xs">
+            * 1개 이상의 식재료를 선택해 주세요(최대 2개)
+          </p>
           <div className="flex flex-col gap-3 mt-4">
             {selectedIngredients.map((ingredient) => (
               <div
                 key={ingredient.id}
-                className="rounded-lg p-2.5 h-[68px] flex items-center justify-between border border-[#d1d1d1] text-lg mt-3 w-full"
+                className="rounded-xl py-4 px-2.5 flex items-center justify-between border border-gray-300 text-lg w-full h-16"
               >
                 <span>{ingredient.name}</span>
                 <button
+                  className="text-xs text-gray-300 h-full px-4"
                   onClick={() => {
                     setSelectedIngredients(
                       selectedIngredients.filter(
@@ -81,7 +83,7 @@ const IngredientSelectionActivity: ActivityComponentType = () => {
                 <DrawerTrigger asChild>
                   <button
                     aria-label="선호 재료 선택하기"
-                    className="py-3 px-1 rounded-xl border border-[#b0b0b0] w-full flex justify-center items-center"
+                    className="rounded-xl p-2.5 flex items-center justify-center border border-gray-300 text-lg w-full h-16"
                   >
                     <Star8 />
                   </button>

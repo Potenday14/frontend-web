@@ -3,12 +3,14 @@ import { cn } from "../utils";
 
 export interface FixedBottomProps extends React.ComponentProps<"div"> {
   bottom?: React.ReactNode;
+  bottomClassName?: string;
 }
 
 export default function FixedBottom({
   className,
   children,
   bottom,
+  bottomClassName,
   ...props
 }: FixedBottomProps) {
   const realRef = useRef<HTMLDivElement>(null);
@@ -32,7 +34,7 @@ export default function FixedBottom({
         ref={realRef}
         className={cn(
           "fixed bottom-0 py-2 px-4 w-full flex flex-col",
-          className
+          bottomClassName
         )}
       >
         {bottom}

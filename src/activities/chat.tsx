@@ -8,6 +8,7 @@ import { createRecipeRecommendation } from "../mock/api";
 import FixedBottom from "../components/layout/fixed-bottom";
 import ArrowUp from "../assets/arrow-up.svg?react";
 import { useFetchCharacters } from "../hooks/queries";
+import Button from "../components/ui/button";
 type ChatParams = {
   characterId: string;
 };
@@ -44,6 +45,7 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
   return (
     <AppScreen appBar={{ title: selectedCharacter?.mood }}>
       <FixedBottom
+        bottomClassName="border-t border-gray-200 py-3"
         bottom={
           <form
             className="w-full flex items-center gap-[14px] bg-white"
@@ -63,12 +65,12 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
               onChange={(e) => setInput(e.target.value)}
               value={input}
               disabled={!textInputAvailable}
-              className="rounded-[10px] bg-[#fbf8f2] px-5 py-3 w-full"
+              className="rounded-[10px] bg-gray-50 px-5 py-3 w-full placeholder:text-gray-300 placeholder:text-sm text-sm"
             />
             <button
               type="submit"
               aria-label="Send message"
-              className="bg-[#ffa5c6] rounded-[10px] p-2.5"
+              className="bg-[#FF468A] rounded-[10px] p-2.5"
             >
               <ArrowUp />
             </button>
@@ -80,10 +82,10 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
             <div
               key={i}
               className={cn(
-                "p-3 rounded-t-2xl",
+                "p-3 rounded-t-2xl w-10/12",
                 m.type === "assistant"
-                  ? "bg-[#fff] rounded-br-2xl mr-[105px] border border-[#e7e7e7]"
-                  : "bg-[#e7e7e7] rounded-bl-2xl ml-[105px]"
+                  ? "bg-white rounded-br-2xl border border-gray-200 mr-auto"
+                  : "bg-gray-50 rounded-bl-2xl ml-auto"
               )}
             >
               <p>{m.message}</p>
@@ -156,11 +158,11 @@ function ChatAction({ label, action }: { label: string; action: string }) {
 export function ChatActionButton({
   className,
   ...props
-}: React.ComponentProps<"button">) {
+}: React.ComponentPropsWithoutRef<"button">) {
   return (
-    <button
+    <Button
       className={cn(
-        "rounded-[4px] border border-[#454545] py-2 px-1 bg-[#fff] w-full text-sm",
+        "py-2 px-1 w-full text-sm rounded-[4px] border border-gray-800 font-normal",
         className
       )}
       {...props}

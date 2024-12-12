@@ -26,25 +26,26 @@ const RecipeActivity: ActivityComponentType<RecipeActivityParams> = ({
         className="w-full aspect-square object-cover"
       />
       <div>
-        <div className="p-4 flex flex-col gap-3">
-          <div className="flex">
-            <dl className="flex gap-3 items-center">
+        <div className="p-4 flex flex-col gap-7">
+          <h1 className="text-lg font-bold">{recipe.name}</h1>
+          <div className="grid grid-cols-2 gap-3">
+            <dl className="flex flex-col gap-3 items-center">
               <dt>
-                <TimeCircle />
+                <TimeCircle className="size-8" />
                 <span className="sr-only">조리 시간</span>
               </dt>
-              <dd className="text-xs">{recipe.time}분</dd>
+              <dd className="text-sm">{recipe.time} min</dd>
             </dl>
-            <dl className="flex text-sm">
-              <dt>열량</dt>
-              <dd>{recipe.calories}kcal</dd>
+            <dl className="flex flex-col gap-3 items-center">
+              <dt className="text-2xl font-semibold">kcal</dt>
+              <dd className="text-sm">{recipe.calories}kcal</dd>
             </dl>
           </div>
-          <h1 className="text-lg font-bold">{recipe.name}</h1>
-          <p className="text-xs">{recipe.tip}</p>
+
+          <p className="text-sm">{recipe.tip}</p>
         </div>
         {/* 재료 영역 */}
-        <div className="p-4 border-y-2 border-[#efe4cc]">
+        <div className="p-4 border-y-[6px] border-gray-50">
           <div className="flex gap-4">
             <h2 className="text-sm font-bold">[재료]</h2>
             <ul>

@@ -4,6 +4,12 @@
 
 @layer base {
     body {
-        @apply text-white
+        @apply text-gray-950
+    }
+}
+
+@layer components {
+    .result__reason b {
+        @apply font-semibold text-xl
     }
 }

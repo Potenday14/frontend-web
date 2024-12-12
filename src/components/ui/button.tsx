@@ -7,7 +7,7 @@ export default function Button({
   return (
     <button
       className={cn(
-        "px-5 py-3 rounded-[10px] bg-[#0e0e0e] text-white text-lg font-semibold flex items-center justify-center",
+        "px-5 py-3 rounded-[10px] bg-gray-950 text-white text-lg font-semibold flex items-center justify-center",
         className
       )}
       {...props}
