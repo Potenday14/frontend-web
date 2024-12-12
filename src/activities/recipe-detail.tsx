@@ -1,8 +1,8 @@
 import { ActivityComponentType } from "@stackflow/react";
-import { AppScreen } from "@stackflow/plugin-basic-ui";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { fetchRecipe } from "../mock/api";
 import TimeCircle from "../assets/time-circle.svg?react";
+import Screen from "../components/screen";
 type RecipeActivityParams = {
   id: number;
 };
@@ -19,7 +19,7 @@ const RecipeActivity: ActivityComponentType<RecipeActivityParams> = ({
   });
 
   return (
-    <AppScreen appBar={{ title: recipe.name }}>
+    <Screen appBar={{ title: recipe.name }}>
       <img
         src={recipe.mainPhoto}
         alt={recipe.name}
@@ -74,7 +74,7 @@ const RecipeActivity: ActivityComponentType<RecipeActivityParams> = ({
           </div>
         </div>
       </div>
-    </AppScreen>
+    </Screen>
   );
 };
 

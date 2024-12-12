@@ -4,7 +4,7 @@ import LoadingSpinner from "../components/loading-spinner";
 
 const ResultLoadingActivity: ActivityComponentType = () => {
   return (
-    <AppScreen appBar={{ title: "My Activity" }}>
+    <AppScreen>
       <h1 className="sr-only">Loading...</h1>
 
       <div className="flex flex-col items-center gap-11 h-full justify-center mx-12">

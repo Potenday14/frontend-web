@@ -1,14 +1,13 @@
 import { ActivityComponentType } from "@stackflow/react";
-import { AppScreen } from "@stackflow/plugin-basic-ui";
 import { useEffect, useState } from "react";
 import { useFlow } from "../stackflow";
 import { useChatbot } from "../chat/chatbot";
 import { cn } from "../components/utils";
 import { createRecipeRecommendation } from "../mock/api";
-import FixedBottom from "../components/layout/fixed-bottom";
 import ArrowUp from "../assets/arrow-up.svg?react";
 import { useFetchCharacters } from "../hooks/queries";
 import Button from "../components/ui/button";
+import Screen from "../components/screen";
 type ChatParams = {
   characterId: string;
 };
@@ -43,66 +42,65 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
   });
 
   return (
-    <AppScreen appBar={{ title: selectedCharacter?.mood }}>
-      <FixedBottom
-        bottomClassName="border-t border-gray-200 py-3"
-        bottom={
-          <form
-            className="w-full flex items-center gap-[14px] bg-white"
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (!textInputAvailable) return;
-              if (input === "") return;
-              e.preventDefault();
+    <Screen
+      appBar={{ title: selectedCharacter?.mood }}
+      bottomClassName="border-t border-gray-200 py-3"
+      bottom={
+        <form
+          className="w-full flex items-center gap-[14px] bg-white"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!textInputAvailable) return;
+            if (input === "") return;
+            e.preventDefault();
 
-              chatbot.respond(input);
-              setInput("");
-            }}
+            chatbot.respond(input);
+            setInput("");
+          }}
+        >
+          <input
+            type="text"
+            placeholder="채팅 입력"
+            onChange={(e) => setInput(e.target.value)}
+            value={input}
+            disabled={!textInputAvailable}
+            className="rounded-[10px] bg-gray-50 px-5 py-3 w-full placeholder:text-gray-300 placeholder:text-sm text-sm"
+          />
+          <button
+            type="submit"
+            aria-label="Send message"
+            className="bg-[#FF468A] rounded-[10px] p-2.5"
           >
-            <input
-              type="text"
-              placeholder="채팅 입력"
-              onChange={(e) => setInput(e.target.value)}
-              value={input}
-              disabled={!textInputAvailable}
-              className="rounded-[10px] bg-gray-50 px-5 py-3 w-full placeholder:text-gray-300 placeholder:text-sm text-sm"
-            />
-            <button
-              type="submit"
-              aria-label="Send message"
-              className="bg-[#FF468A] rounded-[10px] p-2.5"
-            >
-              <ArrowUp />
-            </button>
-          </form>
-        }
-      >
-        <div className="flex gap-6 flex-col py-8 px-4 flex-1 overflow-y-auto">
-          {chatbot.messages.map((m, i) => (
-            <div
-              key={i}
-              className={cn(
-                "p-3 rounded-t-2xl w-10/12",
-                m.type === "assistant"
-                  ? "bg-white rounded-br-2xl border border-gray-200 mr-auto"
-                  : "bg-gray-50 rounded-bl-2xl ml-auto"
-              )}
-            >
-              <p>{m.message}</p>
-              {/* // rendering actions */}
-              <div className="mt-3 flex gap-2">
-                {m.type === "assistant" &&
-                  m.actions
-                    ?.filter((a) => a.type === "button")
-                    .map((a, j) => (
-                      <ChatAction key={j} label={a.label} action={a.action} />
-                    ))}
-              </div>
+            <ArrowUp />
+          </button>
+        </form>
+      }
+    >
+      <div className="flex gap-6 flex-col py-8 px-4 flex-1 overflow-y-auto">
+        {chatbot.messages.map((m, i) => (
+          <div
+            key={i}
+            className={cn(
+              "p-3 rounded-t-2xl w-10/12",
+              m.type === "assistant"
+                ? "bg-white rounded-br-2xl border border-gray-200 mr-auto"
+                : "bg-gray-50 rounded-bl-2xl ml-auto"
+            )}
+          >
+            <p>{m.message}</p>
+            {/* // rendering actions */}
+            <div className="mt-3 flex gap-2">
+              {m.type === "assistant" &&
+                m.actions
+                  ?.filter((a) => a.type === "button")
+                  .map((a, j) => (
+                    <ChatAction key={j} label={a.label} action={a.action} />
+                  ))}
             </div>
-          ))}
-        </div>
-      </FixedBottom>
-    </AppScreen>
+          </div>
+        ))}
+      </div>
+    </Screen>
   );
 };
 
