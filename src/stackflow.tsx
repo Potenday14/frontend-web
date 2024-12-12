@@ -10,6 +10,7 @@ import { historySyncPlugin } from "@stackflow/plugin-history-sync";
 import IngredientSelectionActivity from "./activities/ingredirent-selection";
 import RecipeActivity from "./activities/recipe-detail";
 import ResultLoadingActivity from "./activities/result-loading";
+import ArrowLeft from "./assets/arrow-left.svg?react";
 
 export const { Stack, useFlow } = stackflow({
   transitionDuration: 350,
@@ -27,6 +28,12 @@ export const { Stack, useFlow } = stackflow({
     basicRendererPlugin(),
     basicUIPlugin({
       theme: "cupertino",
+      appBar: {
+        textColor: "#000",
+        backButton: {
+          renderIcon: () => <ArrowLeft />,
+        },
+      },
     }),
     historySyncPlugin({
       routes: {
