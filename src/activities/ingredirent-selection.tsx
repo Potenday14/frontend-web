@@ -29,6 +29,7 @@ const IngredientSelectionActivity: ActivityComponentType = () => {
     setOpen(false);
   }, [setOpen]);
 
+  console.log(chatbot.ingredients, selectedIngredients);
   return (
     <AppScreen appBar={{ title: "재료 선택" }}>
       <FixedBottom
@@ -36,10 +37,11 @@ const IngredientSelectionActivity: ActivityComponentType = () => {
           <Button
             onClick={() => {
               chatbot.setIngredients(selectedIngredients);
+              setSelectedIngredients([]);
               chatbot.respond(
-                `선호 재료 선택 완료: ${selectedIngredients
+                `'${selectedIngredients
                   .map((ingredient) => ingredient.name)
-                  .join(", ")}`
+                  .join("', '")}'이(가) 들어가면 좋겠어`
               );
               pop();
             }}

@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { Ingredient } from "../mock/data";
+import { getRecipeRecommendationMessage } from "./scenarios";
 
 type MessageAction =
   | {
@@ -82,7 +83,7 @@ interface FoodChatbotStore {
   push: (...messages: Message[]) => void;
   setStep: (step: number) => void;
   characterId: number | null;
-  setCharacterId: (characterId: number) => void;
+  setCharacterId: (characterId: number | null) => void;
   ingredients: Ingredient[];
   setIngredients: (ingredients: Ingredient[]) => void;
 }
@@ -115,47 +116,41 @@ export const useChatbot = () => {
 
   const startChat = (characterId: number) => {
     setCharacterId(characterId);
+    setIngredients([]);
+    const message = getRecipeRecommendationMessage(characterId, 0);
     setMessages([
       {
         type: "assistant",
-        message: "오늘은 어떤 음식이 땡기나요?",
-        actions: [
-          {
-            type: "text",
-          },
-        ],
+        message: message.message,
+        actions: message.actions,
       },
     ]);
     setStep(1);
   };
 
   const respond = (input: string) => {
+    if (!characterId) {
+      return;
+    }
     if (step === 1) {
+      const message = getRecipeRecommendationMessage(characterId, 1);
       push(
         { type: "user", message: input },
         {
           type: "assistant",
-          message: "어떤 재료가 있어?",
-          actions: [
-            {
-              type: "button",
-              label: "재료 선택",
-              action: "ingredient-selection",
-            },
-          ],
+          message: message.message,
+          actions: message.actions,
         }
       );
       setStep(2);
     } else if (step === 2) {
+      const message = getRecipeRecommendationMessage(characterId, 2);
       push(
         { type: "user", message: input },
         {
           type: "assistant",
-          message: `선택한 재료가 맞아? 맞다면 요리 추천을 눌러줘. 아니라면 다시하기를 눌러.`,
-          actions: [
-            { type: "button", label: "요리 추천", action: "recommend" },
-            { type: "button", label: "다시하기", action: "restart" },
-          ],
+          message: message.message,
+          actions: message.actions,
         }
       );
       setStep(3);
@@ -170,16 +165,11 @@ export const useChatbot = () => {
         );
         setStep(4);
       } else if (input === "재료 다시 선택") {
+        const message = getRecipeRecommendationMessage(characterId, 1);
         push({
           type: "assistant",
-          message: "어떤 재료가 있어?",
-          actions: [
-            {
-              type: "button",
-              label: "재료 선택",
-              action: "ingredient-selection",
-            },
-          ],
+          message: message.message,
+          actions: message.actions,
         });
         setStep(2);
       }

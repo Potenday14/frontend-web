@@ -1,32 +1,23 @@
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 import { useFlow } from "../stackflow";
-import useRecommendationStore from "../hooks/use-recommendation-step";
 import { EmblaCarousel } from "../components/carousel";
 import { useEffect, useState } from "react";
 import FixedBottom from "../components/layout/fixed-bottom";
 import Button from "../components/ui/button";
 import { useFetchCharacters } from "../hooks/queries";
+import { useChatbot } from "../chat/chatbot";
 
 const MoodSelectionActivity: ActivityComponentType = () => {
   const { data: characters } = useFetchCharacters();
   const [selectedCharacter, setSelectedCharacter] = useState<number | null>(
     null
   );
-  const setContext = useRecommendationStore((state) => state.setContext);
   const { push } = useFlow();
+  const { startChat } = useChatbot();
 
-  const startChat = (characterId: number) => {
-    setContext({
-      step: "inputSentence",
-      characterId,
-      chatHistories: [
-        {
-          type: "assistant",
-          message: "오늘은 어떤 음식이 땡기나요?",
-        },
-      ],
-    });
+  const handleStartChat = (characterId: number) => {
+    startChat(characterId);
     push("ChatActivity", {
       characterId: characterId.toString(),
     });
@@ -45,7 +36,7 @@ const MoodSelectionActivity: ActivityComponentType = () => {
           <Button
             onClick={() => {
               if (selectedCharacter !== null) {
-                startChat(selectedCharacter);
+                handleStartChat(selectedCharacter);
               }
             }}
           >
