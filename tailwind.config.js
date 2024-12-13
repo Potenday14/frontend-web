@@ -7,6 +7,11 @@ export default {
       spacing: {
         container: "37.5rem",
       },
+      backgroundImage: {
+        "chat-angry": "url('/images/화남_BG.png')",
+        "chat-happy": "url('/images/기쁨_BG.png')",
+        "chat-sad": "url('/images/슬픔_BG.png')",
+      },
     },
     colors: {
       transparent: "transparent",
