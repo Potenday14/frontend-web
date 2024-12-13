@@ -1,7 +1,7 @@
 export const moodMap: { [key: number]: "sad" | "angry" | "happy" } = {
-  1: "sad",
-  2: "angry",
-  3: "happy",
+  1: "happy",
+  2: "sad",
+  3: "angry",
 };
 
 export function getMoodName(moodId: number) {

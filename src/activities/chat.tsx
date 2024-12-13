@@ -46,11 +46,11 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
       className={cn(
         "bg-no-repeat bg-cover bg-bottom",
         characterId === "1"
-          ? "bg-chat-sad"
-          : characterId === "2"
-          ? "bg-chat-angry"
-          : characterId === "3"
           ? "bg-chat-happy"
+          : characterId === "2"
+          ? "bg-chat-sad"
+          : characterId === "3"
+          ? "bg-chat-angry"
           : ""
       )}
       appBar={{ title: selectedCharacter?.mood }}
@@ -82,11 +82,11 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
             className={cn(
               "rounded-[10px] p-2.5",
               characterId === "1"
-                ? "bg-[#3F82DC]"
-                : characterId === "2"
-                ? "bg-[#FA361F]"
-                : characterId === "3"
                 ? "bg-[#FF468A]"
+                : characterId === "2"
+                ? "bg-[#3F82DC]"
+                : characterId === "3"
+                ? "bg-[#FA361F]"
                 : "bg-black"
             )}
           >

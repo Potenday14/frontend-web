@@ -15,7 +15,7 @@ const TWEEN_FACTOR_BASE = 0.2;
 const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max);
 
-export function EmblaCarousel({ characters }: EmblaCarouselProps) {
+export function EmblaCarousel({ characters, onSelect }: EmblaCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
   });
@@ -29,7 +29,6 @@ export function EmblaCarousel({ characters }: EmblaCarouselProps) {
       return slideNode.querySelector(".embla__slide__img") as HTMLElement;
     });
   }, []);
-
   const setTweenFactor = useCallback((emblaApi: EmblaCarouselType) => {
     tweenFactor.current = TWEEN_FACTOR_BASE * emblaApi.scrollSnapList().length;
   }, []);
@@ -92,6 +91,10 @@ export function EmblaCarousel({ characters }: EmblaCarouselProps) {
   }, [emblaApi, tweenScale]);
 
   const currentCharacter = characters[selectedIndex];
+
+  useEffect(() => {
+    onSelect(selectedIndex);
+  }, [selectedIndex, onSelect]);
 
   return (
     <div className="embla">

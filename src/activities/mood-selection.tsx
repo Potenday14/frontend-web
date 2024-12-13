@@ -27,7 +27,7 @@ const MoodSelectionActivity: ActivityComponentType = () => {
       setSelectedCharacter(characters[0].id);
     }
   }, [setSelectedCharacter, characters, selectedCharacter]);
-
+  console.log(selectedCharacter);
   return (
     <Screen
       bottom={

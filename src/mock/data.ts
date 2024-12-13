@@ -7,8 +7,8 @@ export type Character = {
 export const characters: Character[] = [
   {
     id: 1,
-    mood: "화남",
-    image: "/images/화남.png",
+    mood: "기쁨",
+    image: "/images/기쁨.png",
   },
   {
     id: 2,
@@ -17,8 +17,8 @@ export const characters: Character[] = [
   },
   {
     id: 3,
-    mood: "기쁨",
-    image: "/images/기쁨.png",
+    mood: "화남",
+    image: "/images/화남.png",
   },
 ];
 
