@@ -21,6 +21,7 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
 
   const lastMessage =
     chatbot.messages[chatbot.messages.length - 1] || undefined;
+
   const textInputAvailable =
     lastMessage?.type === "assistant" &&
     lastMessage.actions?.some((a) => a.type === "text");
@@ -53,7 +54,7 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
           ? "bg-chat-angry"
           : ""
       )}
-      appBar={{ title: selectedCharacter?.mood }}
+      appBar={{ title: selectedCharacter?.nickname }}
       bottomClassName="border-t border-gray-200 py-3"
       bottom={
         <form

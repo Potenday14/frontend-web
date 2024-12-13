@@ -90,14 +90,12 @@ const IngredientSelectionActivity: ActivityComponentType = () => {
             )}
             <DrawerContent className="h-[80%]">
               <DrawerHeader>
-                <DrawerTitle className="sr-only">
-                  Are you absolutely sure?
-                </DrawerTitle>
+                <DrawerTitle className="sr-only">재료 선택하기</DrawerTitle>
                 <DrawerDescription className="sr-only">
-                  This action cannot be undone.
+                  선호하는 레시피 재료를 선택해 주세요
                 </DrawerDescription>
               </DrawerHeader>
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<div />}>
                 <IngredientSelect
                   selectedIngredients={selectedIngredients}
                   setSelectedIngredients={setSelectedIngredients}

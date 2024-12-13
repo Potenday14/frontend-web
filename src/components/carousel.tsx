@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef } from "react";
 import { DotButton, useDotButton } from "./dot-button";
 import { cn } from "./utils";
 import { EmblaCarouselType, EmblaEventType } from "embla-carousel";
-import { Character } from "../hooks/queries";
+import { Character } from "../types";
 
 interface EmblaCarouselProps {
   characters: Character[];

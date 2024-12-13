@@ -27,10 +27,7 @@ const ResultsActivity: ActivityComponentType<ResultsActivityParams> = ({
     <Screen
       appBar={{ title: "레시피 추천 결과" }}
       onScroll={(e) => {
-        console.log("Page scroll: ", e.currentTarget.scrollTop);
-        const scrolled = e.currentTarget.scrollTop > 0;
-        console.log("Scrolled: ", scrolled);
-        setScrolled(scrolled);
+        setScrolled(e.currentTarget.scrollTop > 0);
       }}
     >
       <div className="relative p-4 h-full group" ref={containerRef}>

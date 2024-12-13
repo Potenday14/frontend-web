@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Character } from "../mock/data";
+import { Character } from "../types";
 
 interface CharacterStore {
   selectedCharacter: Character | null;

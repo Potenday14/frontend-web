@@ -1,14 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { fetchRecipeRecommendation } from "../mock/api";
-
-export type Character = {
-  id: number;
-  mood: "HAPPY" | "SAD" | "ANGRY";
-  nickname: string;
-  image: string;
-};
-
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import { Character, Recipe } from "../types";
+import { API_BASE_URL } from "../constansts/feature";
 
 export function useFetchCharacters() {
   return useSuspenseQuery({
@@ -63,30 +56,6 @@ export function useFetchRecommendation({
     },
   });
 }
-
-export type Recipe = {
-  id: number;
-  name: string;
-  ingredients: {
-    id: number;
-    name: string;
-    quantity: string;
-  }[];
-  mainPhoto: string;
-  manuals: {
-    order: number;
-    photo: string;
-    description: string;
-  }[];
-  tip: string;
-  reason: string;
-  minutes: number;
-  calories: number;
-  carbohydrates: number;
-  protein: number;
-  fat: number;
-  salt: number;
-};
 
 export function useFetchRecipe({ recipeId }: { recipeId: number }) {
   return useSuspenseQuery({
