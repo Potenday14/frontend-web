@@ -33,3 +33,26 @@ export type Recipe = {
   fat: number;
   salt: number;
 };
+
+export type RecommendationRecipe = {
+  id: number;
+  name: string;
+  mainPhoto: string;
+  minutes: number;
+  calories: number;
+};
+
+export type Recommendation = {
+  reason: string;
+  keywords: string[];
+  recipes: RecommendationRecipe[];
+};
+
+export type CreateRecipeRecommendationRequest = {
+  characterId: number;
+  ingredients: Ingredient[];
+  chatHistories: {
+    role: "assistant" | "user";
+    content: string;
+  }[];
+};

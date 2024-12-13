@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { useFlow } from "../stackflow";
 import { useChatbot } from "../chat/chatbot";
 import { cn } from "../components/utils";
-import { createRecipeRecommendation } from "../mock/api";
 import ArrowUp from "../assets/arrow-up.svg?react";
 import { useFetchCharacters } from "../hooks/queries";
 import Button from "../components/ui/button";
 import Screen from "../components/screen";
+import { useCreateRecipeRecommendation } from "../hooks/mutations";
 type ChatParams = {
   characterId: string;
 };
@@ -127,6 +127,7 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
 export default ChatActivity;
 
 function ChatAction({ label, action }: { label: string; action: string }) {
+  const createRecipeRecommendation = useCreateRecipeRecommendation();
   const chatbot = useChatbot();
   const flow = useFlow();
   if (action === "ingredient-selection") {
@@ -145,18 +146,24 @@ function ChatAction({ label, action }: { label: string; action: string }) {
         onClick={() => {
           if (!chatbot.characterId || chatbot.ingredients.length === 0) return;
           flow.push("ResultLoadingActivity", {});
-          createRecipeRecommendation({
-            characterId: chatbot.characterId,
-            ingredients: chatbot.ingredients,
-            chatHistories: chatbot.messages.slice(0, 2).map((m) => {
-              return {
-                role: m.type,
-                content: m.message,
-              };
-            }),
-          }).then(({ recommendationId }) => {
-            flow.push("ResultsActivity", { id: recommendationId });
-          });
+          createRecipeRecommendation.mutate(
+            {
+              characterId: chatbot.characterId,
+              ingredients: chatbot.ingredients,
+              chatHistories: chatbot.messages.slice(0, 2).map((m) => {
+                return {
+                  role: m.type,
+                  content: m.message,
+                };
+              }),
+            },
+
+            {
+              onSuccess: ({ recommendationId }) => {
+                flow.push("ResultsActivity", { id: recommendationId });
+              },
+            }
+          );
         }}
       >
         {label}

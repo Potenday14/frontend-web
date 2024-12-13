@@ -1,6 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { fetchRecipeRecommendation } from "../mock/api";
-import { Character, Recipe } from "../types";
+import { Character, Recipe, Recommendation } from "../types";
 import { API_BASE_URL } from "../constants/feature";
 
 export function useFetchCharacters() {
@@ -51,9 +50,15 @@ export function useFetchRecommendation({
 }) {
   return useSuspenseQuery({
     queryKey: ["recommendation", { recommendationId }],
-    queryFn: async () => {
-      return fetchRecipeRecommendation({ recommendationId });
-    },
+    queryFn: async () =>
+      fetch(`${API_BASE_URL}/recipe-recommendations/${recommendationId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then(async (res) => {
+        return res.json() as Promise<Recommendation>;
+      }),
   });
 }
 

@@ -34,9 +34,10 @@ const ResultsActivity: ActivityComponentType<ResultsActivityParams> = ({
       <div className="relative p-4 h-full group" ref={containerRef}>
         <h1 className="sr-only">추천 결과</h1>
 
-        <p className="text-lg bg-gray-50 py-6 px-4 rounded-xl result__reason">
-          {recommendation.reason}
-        </p>
+        <p
+          className="text-lg bg-gray-50 py-6 px-4 rounded-xl result__reason"
+          dangerouslySetInnerHTML={{ __html: recommendation.reason }}
+        ></p>
 
         <div className="mt-[18px]">
           {recommendation.recipes.map((recipe) => (
@@ -55,7 +56,7 @@ const ResultsActivity: ActivityComponentType<ResultsActivityParams> = ({
                         <TimeCircle />
                         <span className="sr-only">조리 시간</span>
                       </dt>
-                      <dd className="text-sm">{recipe.time}분</dd>
+                      <dd className="text-sm">{recipe.minutes}분</dd>
                     </dl>
                     <dl className="flex gap-3 items-center">
                       <dt>
