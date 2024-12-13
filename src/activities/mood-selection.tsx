@@ -43,7 +43,7 @@ const MoodSelectionActivity: ActivityComponentType = () => {
       }
     >
       <div className="h-full flex flex-col justify-center gap-12">
-        <h1 className="text-center text-xl font-semibold">
+        <h1 className="text-center text-[26px] font-semibold">
           오늘 기분을 선택하세요
         </h1>
         <EmblaCarousel

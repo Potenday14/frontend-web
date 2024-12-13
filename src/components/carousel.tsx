@@ -114,10 +114,10 @@ export function EmblaCarousel({ characters, onSelect }: EmblaCarouselProps) {
           ))}
         </div>
       </div>
-      <div className="flex items-center text-center justify-center mt-4">
+      <div className="flex items-center text-center justify-center mt-5 text-xl font-semibold">
         {currentCharacter.mood}
       </div>
-      <div className="embla__dots flex flex-wrap justify-center items-center gap-[9px] mt-4">
+      <div className="embla__dots flex flex-wrap justify-center items-center gap-[9px] mt-[42px]">
         {scrollSnaps.map((_, index) => (
           <DotButton
             key={index}
