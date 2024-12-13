@@ -45,11 +45,11 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
     <Screen
       className={cn(
         "bg-no-repeat bg-cover bg-bottom",
-        characterId === "1"
+        selectedCharacter?.mood === "HAPPY"
           ? "bg-chat-happy"
-          : characterId === "2"
+          : selectedCharacter?.mood === "SAD"
           ? "bg-chat-sad"
-          : characterId === "3"
+          : selectedCharacter?.mood === "ANGRY"
           ? "bg-chat-angry"
           : ""
       )}
@@ -81,11 +81,11 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
             aria-label="Send message"
             className={cn(
               "rounded-[10px] p-2.5",
-              characterId === "1"
+              selectedCharacter?.mood === "HAPPY"
                 ? "bg-[#FF468A]"
-                : characterId === "2"
+                : selectedCharacter?.mood === "SAD"
                 ? "bg-[#3F82DC]"
-                : characterId === "3"
+                : selectedCharacter?.mood === "ANGRY"
                 ? "bg-[#FA361F]"
                 : "bg-black"
             )}

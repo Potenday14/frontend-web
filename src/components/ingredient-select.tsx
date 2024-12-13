@@ -1,9 +1,8 @@
 import { Suspense, useState } from "react";
-import { Ingredient } from "../mock/data";
 import Button from "./ui/button";
 import { cn } from "./utils";
-import { useFetchIngredients } from "../hooks/queries";
-
+import { Ingredient, useFetchIngredients } from "../hooks/queries";
+import { useDebounce } from "@uidotdev/usehooks";
 type IngredientSelectProps = {
   selectedIngredients: Ingredient[];
   setSelectedIngredients: (ingredients: Ingredient[]) => void;
@@ -17,7 +16,7 @@ function IngredientSelect({
 }: IngredientSelectProps) {
   const [search, setSearch] = useState("");
   const [tempIngredients, setTempIngredients] = useState<Ingredient[]>([]);
-
+  const debouncedSearch = useDebounce(search, 100);
   const selectedTotalIngredient =
     selectedIngredients.length + tempIngredients.length;
 
@@ -33,7 +32,7 @@ function IngredientSelect({
       {/* 재료 검색 결과 리스트 */}
       <Suspense fallback={<div className="h-full"></div>}>
         <IngredientList
-          search={search}
+          search={debouncedSearch}
           isSelected={(ingredient) => {
             return (
               tempIngredients.filter(

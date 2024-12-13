@@ -1,8 +1,7 @@
 import { ActivityComponentType } from "@stackflow/react";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { fetchRecipe } from "../mock/api";
 import TimeCircle from "../assets/time-circle.svg?react";
 import Screen from "../components/screen";
+import { useFetchRecipe } from "../hooks/queries";
 type RecipeActivityParams = {
   id: number;
 };
@@ -11,12 +10,7 @@ const RecipeActivity: ActivityComponentType<RecipeActivityParams> = ({
   params,
 }) => {
   const recipeId = params.id;
-  const { data: recipe } = useSuspenseQuery({
-    queryKey: ["recipe", { recipeId }],
-    queryFn: async () => {
-      return fetchRecipe(recipeId);
-    },
-  });
+  const { data: recipe } = useFetchRecipe({ recipeId });
 
   return (
     <Screen appBar={{ title: recipe.name }}>
@@ -34,7 +28,7 @@ const RecipeActivity: ActivityComponentType<RecipeActivityParams> = ({
                 <TimeCircle className="size-8" />
                 <span className="sr-only">조리 시간</span>
               </dt>
-              <dd className="text-sm">{recipe.time} min</dd>
+              <dd className="text-sm">{recipe.minutes} min</dd>
             </dl>
             <dl className="flex flex-col gap-3 items-center">
               <dt className="text-2xl font-semibold">kcal</dt>
@@ -42,37 +36,45 @@ const RecipeActivity: ActivityComponentType<RecipeActivityParams> = ({
             </dl>
           </div>
 
-          <p className="text-sm">{recipe.tip}</p>
+          <p className="text-sm">{recipe.reason}</p>
         </div>
         {/* 재료 영역 */}
-        <div className="p-4 border-y-[6px] border-gray-50">
-          <div className="flex gap-4">
-            <h2 className="text-sm font-bold">[재료]</h2>
-            <ul>
-              {recipe.ingredients.main.map((ingredient) => (
-                <li key={ingredient.name} className="flex gap-2">
-                  <span>{ingredient.name}</span>
-                  <span>{ingredient.quantity}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="mt-5">
-            {recipe.ingredients.sub.map((ingredient) => (
-              <li key={ingredient.name} className="flex gap-2">
-                <h2 className="text-sm font-bold">[{ingredient.name}]</h2>
-                <ul>
-                  {ingredient.data.map((data) => (
-                    <li key={data.name} className="flex gap-2">
-                      <span>{data.name}</span>
-                      <span>{data.quantity}</span>
-                    </li>
-                  ))}
-                </ul>
+        <div className="border-t-8 border-gray-50">
+          <h2 className="font-bold mt-6 mx-4">재료</h2>
+          <ul className="mt-6">
+            {recipe.ingredients.map((ingredient) => (
+              <li
+                key={ingredient.id}
+                className="flex justify-between text-sm py-3 pl-4 pr-6 border-b border-gray-100"
+              >
+                <span>{ingredient.name}</span>
+                <span>{ingredient.quantity}</span>
               </li>
             ))}
-          </div>
+          </ul>
         </div>
+        {/* 조리법 영역 */}
+        <div className="border-t-8 border-gray-50">
+          <h2 className="font-bold mt-6 mx-4">조리과정</h2>
+          <ul className="mt-6">
+            {recipe.manuals.map((manual, index) => (
+              <li
+                key={index}
+                className="flex justify-between py-3 px-4 flex-col"
+              >
+                <p className="text-sm">
+                  {index + 1}. {manual.description}
+                </p>
+                <img
+                  src={manual.photo}
+                  alt={manual.description}
+                  className="w-full object-cover rounded mt-2"
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="h-20"></div>
       </div>
     </Screen>
   );

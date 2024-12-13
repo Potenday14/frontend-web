@@ -1,9 +1,9 @@
 import useEmblaCarousel from "embla-carousel-react";
-import { Character } from "../mock/data";
 import { useCallback, useEffect, useRef } from "react";
 import { DotButton, useDotButton } from "./dot-button";
 import { cn } from "./utils";
 import { EmblaCarouselType, EmblaEventType } from "embla-carousel";
+import { Character } from "../hooks/queries";
 
 interface EmblaCarouselProps {
   characters: Character[];
@@ -106,7 +106,7 @@ export function EmblaCarousel({ characters, onSelect }: EmblaCarouselProps) {
               className="embla__slide flex-shrink-0 flex-grow-0 basis-6/12 flex items-center justify-center"
             >
               <img
-                src={character.image}
+                src={`/images/${character.image}`}
                 alt={character.mood}
                 className="embla__slide__img select-none"
               />
@@ -115,7 +115,7 @@ export function EmblaCarousel({ characters, onSelect }: EmblaCarouselProps) {
         </div>
       </div>
       <div className="flex items-center text-center justify-center mt-5 text-xl font-semibold">
-        {currentCharacter.mood}
+        {currentCharacter.nickname}
       </div>
       <div className="embla__dots flex flex-wrap justify-center items-center gap-[9px] mt-[42px]">
         {scrollSnaps.map((_, index) => (

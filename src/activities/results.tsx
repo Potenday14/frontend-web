@@ -1,10 +1,9 @@
 import { ActivityComponentType } from "@stackflow/react";
 import { useQueryClient } from "@tanstack/react-query";
-import { fetchRecipe } from "../mock/api";
 import { useFlow } from "../stackflow";
 import TimeCircle from "../assets/time-circle.svg?react";
 import Calorie from "../assets/calorie.svg?react";
-import { useFetchRecommendation } from "../hooks/queries";
+import { API_BASE_URL, useFetchRecommendation } from "../hooks/queries";
 import ArrowUp from "../assets/arrow-up.svg?react";
 import { useRef, useState } from "react";
 import { cn } from "../components/utils";
@@ -81,7 +80,12 @@ const ResultsActivity: ActivityComponentType<ResultsActivityParams> = ({
                       await queryClient.prefetchQuery({
                         queryKey: ["recipe", { recipeId: recipe.id }],
                         queryFn: async () => {
-                          return fetchRecipe(recipe.id);
+                          return fetch(`${API_BASE_URL}/recipes/${recipe.id}`, {
+                            method: "GET",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                          }).then((res) => res.json());
                         },
                       });
                     }
