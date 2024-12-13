@@ -8,8 +8,12 @@ const HomeActivity: ActivityComponentType = () => {
 
   return (
     <Screen
-      className="flex flex-col items-center justify-center"
-      bottom={
+      className="flex flex-col items-center justify-center bg-home bg-no-repeat bg-cover"
+      bottomClassName="bg-transparent"
+    >
+      <h1 className="sr-only">moodeat</h1>
+
+      <div className="fixed bottom-0 pt-2 pb-[29px] px-4 w-full flex flex-col">
         <Button
           className="w-full"
           onClick={() => {
@@ -18,11 +22,6 @@ const HomeActivity: ActivityComponentType = () => {
         >
           시작하기
         </Button>
-      }
-    >
-      <div className="flex items-center flex-col gap-8 my-auto">
-        <img src="/images/logo.png" width={375} height={163} alt="mood eat" />
-        <img src="/images/loading.png" width={222} height={234} alt="loading" />
       </div>
     </Screen>
   );
