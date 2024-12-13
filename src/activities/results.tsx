@@ -3,11 +3,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useFlow } from "../stackflow";
 import TimeCircle from "../assets/time-circle.svg?react";
 import Calorie from "../assets/calorie.svg?react";
-import { API_BASE_URL, useFetchRecommendation } from "../hooks/queries";
+import { useFetchRecommendation } from "../hooks/queries";
 import ArrowUp from "../assets/arrow-up.svg?react";
 import { useRef, useState } from "react";
 import { cn } from "../components/utils";
 import Screen from "../components/screen";
+import { API_BASE_URL } from "../constansts/feature";
 type ResultsActivityParams = {
   id: number;
 };
