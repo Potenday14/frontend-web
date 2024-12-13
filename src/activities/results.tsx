@@ -8,7 +8,7 @@ import ArrowUp from "../assets/arrow-up.svg?react";
 import { useRef, useState } from "react";
 import { cn } from "../components/utils";
 import Screen from "../components/screen";
-import { API_BASE_URL } from "../constansts/feature";
+import { API_BASE_URL } from "../constants/feature";
 type ResultsActivityParams = {
   id: number;
 };

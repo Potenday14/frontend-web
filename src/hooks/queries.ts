@@ -1,7 +1,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { fetchRecipeRecommendation } from "../mock/api";
 import { Character, Recipe } from "../types";
-import { API_BASE_URL } from "../constansts/feature";
+import { API_BASE_URL } from "../constants/feature";
 
 export function useFetchCharacters() {
   return useSuspenseQuery({

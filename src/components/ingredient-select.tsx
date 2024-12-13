@@ -3,7 +3,7 @@ import Button from "./ui/button";
 import { cn } from "./utils";
 import { Ingredient, useFetchIngredients } from "../hooks/queries";
 import { useDebounce } from "@uidotdev/usehooks";
-import { MAX_SELECTED_INGREDIENT } from "../constansts/feature";
+import { MAX_SELECTED_INGREDIENT } from "../constants/feature";
 type IngredientSelectProps = {
   selectedIngredients: Ingredient[];
   setSelectedIngredients: (ingredients: Ingredient[]) => void;

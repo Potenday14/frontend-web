@@ -2,7 +2,7 @@ import { ActivityComponentType } from "@stackflow/react";
 import { useFlow } from "../stackflow";
 import Button from "../components/ui/button";
 import Screen from "../components/screen";
-import { SITE_NAME } from "../constansts/site";
+import { SITE_NAME } from "../constants/site";
 
 const HomeActivity: ActivityComponentType = () => {
   return (
