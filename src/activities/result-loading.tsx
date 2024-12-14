@@ -1,10 +1,14 @@
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 import LoadingSpinner from "../components/loading-spinner";
+import { Helmet } from "react-helmet";
 
 const ResultLoadingActivity: ActivityComponentType = () => {
   return (
     <AppScreen>
+      <Helmet>
+        <title>결과를 불러오는 중...</title>
+      </Helmet>
       <h1 className="sr-only">Loading...</h1>
 
       <div className="flex flex-col items-center gap-11 h-full justify-center mx-12">

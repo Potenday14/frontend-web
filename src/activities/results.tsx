@@ -9,6 +9,7 @@ import { useRef, useState } from "react";
 import { cn } from "../components/utils";
 import Screen from "../components/screen";
 import { API_BASE_URL } from "../constants/feature";
+import { Helmet } from "react-helmet";
 type ResultsActivityParams = {
   id: number;
 };
@@ -31,6 +32,12 @@ const ResultsActivity: ActivityComponentType<ResultsActivityParams> = ({
         setScrolled(e.currentTarget.scrollTop > 0);
       }}
     >
+      <Helmet>
+        <title>
+          레시피 추천 결과
+        </title>
+
+      </Helmet>
       <div className="relative p-4 h-full group" ref={containerRef}>
         <h1 className="sr-only">추천 결과</h1>
 

@@ -6,6 +6,7 @@ import Button from "../components/ui/button";
 import { useFetchCharacters } from "../hooks/queries";
 import { useChatbot } from "../chat/chatbot";
 import Screen from "../components/screen";
+import { Helmet } from "react-helmet";
 
 const MoodSelectionActivity: ActivityComponentType = () => {
   const { data: characters } = useFetchCharacters();
@@ -42,6 +43,9 @@ const MoodSelectionActivity: ActivityComponentType = () => {
         </Button>
       }
     >
+      <Helmet>
+        <title>오늘 기분을 선택하세요</title>
+      </Helmet>
       <div className="h-full flex flex-col justify-center gap-12">
         <h1 className="text-center text-[26px] font-semibold">
           오늘 기분을 선택하세요

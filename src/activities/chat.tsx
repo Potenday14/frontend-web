@@ -8,6 +8,7 @@ import { useFetchCharacters } from "../hooks/queries";
 import Button from "../components/ui/button";
 import Screen from "../components/screen";
 import { useCreateRecipeRecommendation } from "../hooks/mutations";
+import { Helmet } from "react-helmet";
 type ChatParams = {
   characterId: string;
 };
@@ -96,6 +97,9 @@ const ChatActivity: ActivityComponentType<ChatParams> = ({ params }) => {
         </form>
       }
     >
+      <Helmet>
+        <title>{selectedCharacter?.nickname}와 대화하기</title>
+      </Helmet>
       <div className="flex gap-6 flex-col py-8 px-4 flex-1 overflow-y-auto">
         {chatbot.messages.map((m, i) => (
           <div

@@ -15,6 +15,7 @@ import { Suspense, useCallback, useState } from "react";
 import Star8 from "../assets/star-8.svg?react";
 import IngredientSelect from "../components/ingredient-select";
 import Screen from "../components/screen";
+import { Helmet } from "react-helmet";
 
 const IngredientSelectionActivity: ActivityComponentType = () => {
   const chatbot = useChatbot();
@@ -48,6 +49,9 @@ const IngredientSelectionActivity: ActivityComponentType = () => {
         </Button>
       }
     >
+      <Helmet>
+        <title>재료 선택하기</title>
+      </Helmet>
       <div className="w-full h-full py-6 px-4">
         <h1 className="sr-only">재료 선택</h1>
         <h2>선호 재료</h2>

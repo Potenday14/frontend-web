@@ -2,6 +2,7 @@ import { ActivityComponentType } from "@stackflow/react";
 import TimeCircle from "../assets/time-circle.svg?react";
 import Screen from "../components/screen";
 import { useFetchRecipe } from "../hooks/queries";
+import { Helmet } from "react-helmet";
 type RecipeActivityParams = {
   id: number;
 };
@@ -19,6 +20,9 @@ const RecipeActivity: ActivityComponentType<RecipeActivityParams> = ({
         alt={recipe.name}
         className="w-full aspect-square object-cover"
       />
+      <Helmet>
+        <title>{recipe.name}</title>
+      </Helmet>
       <div>
         <div className="p-4 flex flex-col gap-7">
           <h1 className="text-lg font-bold">{recipe.name}</h1>
