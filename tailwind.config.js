@@ -11,7 +11,7 @@ export default {
         "chat-angry": "url('/images/화남_BG.png')",
         "chat-happy": "url('/images/기쁨_BG.png')",
         "chat-sad": "url('/images/슬픔_BG.png')",
-        home: "url('/images/home_bg.png')",
+        home: "url('/images/home_bg.jpg')",
       },
     },
     colors: {
