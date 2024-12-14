@@ -164,7 +164,7 @@ function ChatAction({ label, action }: { label: string; action: string }) {
 
             {
               onSuccess: ({ recommendationId }) => {
-                flow.push("ResultsActivity", { id: recommendationId });
+                flow.replace("ResultsActivity", { id: recommendationId });
               },
             }
           );
