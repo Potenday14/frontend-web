@@ -23,59 +23,6 @@ type Message =
       message: string;
     };
 
-// const createFoodChatbot = (promptStyle: string): FoodChatbot => {
-//   let step = 1;
-//   let messages: Message[] = [
-//     {
-//       type: "assistant",
-//       message: "어떤 맛이 땡기니?",
-//     },
-//   ];
-
-//   const getStep = () => step;
-
-//   const getMessages = () => messages;
-
-//   const respond = (input: string): Message => {
-//     if (step === 1) {
-//       messages.push({ type: "user", message: input });
-//       messages.push({
-//         type: "assistant",
-//         message: "어떤 재료가 있어?",
-//       });
-//       step = 2;
-//     } else if (step === 2) {
-//       messages.push({ type: "user", message: input });
-//       messages.push({
-//         type: "assistant",
-//         message: `선택한 재료가 ${promptStyle}가 맞아? 맞다면 요리 추천을 눌러줘. 아니라면 다시하기를 눌러.`,
-//         actions: [
-//           { type: "button", label: "요리 추천", action: "recommend" },
-//           { type: "button", label: "다시하기", action: "restart" },
-//         ],
-//       });
-//       step = 3;
-//     } else if (step === 3) {
-//       if (input === "추천해줘") {
-//         messages.push({ type: "user", message: input });
-//         messages.push({
-//           type: "assistant",
-//           message: "추천된 요리는 떡볶이야.",
-//         });
-//         step = 4;
-//       } else if (input === "재료 다시 선택") {
-//         messages = [
-//           {
-//             type: "assistant",
-//             message: "어떤 재료가 있어?",
-//           },
-//         ];
-//         step = 2;
-//       }
-//     }
-//     return messages[messages.length - 1];
-//   };
-// };
 interface FoodChatbotStore {
   messages: Message[];
   step: number;
@@ -145,11 +92,13 @@ export const useChatbot = () => {
       setStep(2);
     } else if (step === 2) {
       const message = getRecipeRecommendationMessage(characterId, 2);
+
+      const textMessage = `선택한 재료가 맞을까?`;
       push(
         { type: "user", message: input },
         {
           type: "assistant",
-          message: message.message,
+          message: textMessage,
           actions: message.actions,
         }
       );
@@ -164,13 +113,19 @@ export const useChatbot = () => {
           }
         );
         setStep(4);
-      } else if (input === "재료 다시 선택") {
-        const message = getRecipeRecommendationMessage(characterId, 1);
-        push({
-          type: "assistant",
-          message: message.message,
-          actions: message.actions,
-        });
+      } else if (input === "재료 다시 선택할래") {
+        const message = getRecipeRecommendationMessage(characterId, 3);
+        push(
+          {
+            type: "user",
+            message: input,
+          },
+          {
+            type: "assistant",
+            message: message.message,
+            actions: message.actions,
+          }
+        );
         setStep(2);
       }
     }

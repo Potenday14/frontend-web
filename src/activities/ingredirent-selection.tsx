@@ -36,12 +36,13 @@ const IngredientSelectionActivity: ActivityComponentType = () => {
           onClick={() => {
             chatbot.setIngredients(selectedIngredients);
             setSelectedIngredients([]);
+
+            pop();
             chatbot.respond(
               `'${selectedIngredients
                 .map((ingredient) => ingredient.name)
                 .join("', '")}'이(가) 들어가면 좋겠어`
             );
-            pop();
           }}
           disabled={selectedIngredients.length < 1}
         >

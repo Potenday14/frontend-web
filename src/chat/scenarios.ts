@@ -113,8 +113,8 @@ export const recipeRecommendationScenario: RecipeRecommendationScenario = {
         },
       },
       actions: [
-        { type: "button", label: "요리 추천", action: "recommend" },
-        { type: "button", label: "다시하기", action: "restart" },
+        { type: "button", label: "응, 맞아", action: "recommend" },
+        { type: "button", label: "다시할래", action: "restart" },
       ],
     },
     {

@@ -177,7 +177,7 @@ function ChatAction({ label, action }: { label: string; action: string }) {
 
   if (action === "restart") {
     return (
-      <ChatActionButton onClick={() => chatbot.respond("재료 다시 선택")}>
+      <ChatActionButton onClick={() => chatbot.respond("재료 다시 선택할래")}>
         {label}
       </ChatActionButton>
     );
